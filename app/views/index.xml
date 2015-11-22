@@ -1,0 +1,125 @@
+<Alloy>
+	<TabGroup>
+		<Tab title="Calculator" icon="KS_nav_ui.png">
+			<Window title="Calculator">
+				<TableView id="table">
+					 <TableViewSection>
+					 	<HeaderView>
+							<Label class="header">True-Air-Speed Calculator</Label>
+						</HeaderView>
+		            </TableViewSection>
+					<TableViewRow>
+						<Label>Airspeed</Label>
+						<TextField hintText="IAS" value="120" min="1" number="true" id="IAS" onBlur="compute"/>
+						<Label class="info">Kts</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>Altitude</Label>
+						<TextField hintText="Altitude" max="115000" value="6000" number="true" id="IA" onBlur="calcAlt"/>
+						<Label class="info">Ft</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>Altimeter</Label>
+						<TextField hintText="Altimeter" min="1" max="50" value="23.98" number="true" id="altstg" onBlur="compute"/>
+						<Label class="info">Hg</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>Temperature</Label>
+						<TextField hintText="Temperature" value="3.1" min="-100" max="500" number="true" negative="true" id="temp" onBlur="compute"/>
+						<Label class="info">°C</Label>
+					</TableViewRow>
+					
+					<TableViewRow class="hr_row">
+						<View class="hr"/>
+					</TableViewRow>
+					
+					<TableViewRow>
+						<Label>True Airspeed</Label>
+						<TextField hintText="TAS" number="true" id="TAS" editable="false"/>
+						<Label class="info">Kts</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>Density Altitude</Label>
+						<TextField hintText="DA" number="true" id="DA" editable="false"/>
+						<Label class="info">Ft</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>Pressure Altitude</Label>
+						<TextField hintText="PA" number="true" id="PA" editable="false"/>
+						<Label class="info">Ft</Label>
+					</TableViewRow>
+					
+					<TableViewSection>
+					 	<HeaderView>
+							<Label class="header">Heading, Ground Speed, Wind</Label>
+						</HeaderView>
+		            </TableViewSection>
+					<TableViewRow>
+						<Label>Wind Speed</Label>
+						<TextField hintText="Wind Speed" value="0" max="500" number="true" id="WS" onBlur="compute"/>
+						<Label class="info">Kts</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>Wind Direction</Label>
+						<TextField hintText="Wind Direction" value="360" max="360" number="true" id="WD" onBlur="compute"/>
+						<Label class="info">°</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>Course</Label>
+						<TextField hintText="Course" value="360" max="360" number="true" id="course" onBlur="compute"/>
+						<Label class="info">°</Label>
+					</TableViewRow>
+					
+					<TableViewRow class="hr_row">
+						<View class="hr"/>
+					</TableViewRow>
+					
+					<TableViewRow>
+						<Label>Ground Speed</Label>
+						<TextField hintText="Ground Speed" number="true" id="GS" editable="false"/>
+						<Label class="info">Kts</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>Heading</Label>
+						<TextField hintText="Heading" number="true" id="heading" editable="false"/>
+						<Label class="info">°</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>Wind Correction</Label>
+						<TextField hintText="Wind Correction Angle" number="true" editable="false" negative="true" id="WCA"/>
+						<Label class="info">°</Label>
+					</TableViewRow>
+					
+					<TableViewSection>
+					 	<HeaderView>
+							<Label class="header">Holding Calculation Distance</Label>
+						</HeaderView>
+		            </TableViewSection>
+					<TableViewRow>
+						<Label>Inbound Leg</Label>
+						<TextField hintText="Inbound Leg Distance" number="true" id="distance" editable="false"/>
+						<Label class="info">NM</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>XTRK</Label>
+						<TextField hintText="Cross-Track Error" number="true" id="XTRK" editable="false"/>
+						<Label class="info">NM</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Label>Diagonal  Distance</Label>
+						<TextField hintText="Diagonal  Distance" number="true" id="diagonal" editable="false"/>
+						<Label class="info">NM</Label>
+					</TableViewRow>
+					<TableViewRow>
+						<Button onClick="compute">Calculate</Button>
+					</TableViewRow>
+				</TableView>
+			</Window>
+		</Tab>
+		<Tab title="Pattern" icon="KS_nav_views.png">
+			<Window title="Tab 2">
+				<Label>TO DO</Label>
+			</Window>
+		</Tab>
+	</TabGroup>
+</Alloy>

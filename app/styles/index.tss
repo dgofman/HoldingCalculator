@@ -1,0 +1,79 @@
+'Window': {
+	backgroundColor: '#fff'
+}
+
+'.header': {
+	backgroundColor: '#C0C0C0',
+	font: {
+		fontWeight: 'bold'
+	}
+}
+
+'Label': {
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	color: '#000',
+	left: 3,
+	width: 160,
+	font: {
+		fontSize: 18,
+		fontFamily: 'Helvetica Neue'
+	},
+	textAlign: 'center'
+}
+
+'.info': {
+	left: null,
+	width: 30,
+	right: 3,
+	color: '#aaa',
+	textAlign: 'left'
+}
+
+'TextField': {
+	left: 165,
+	right: 40,
+	height: 27,
+	top: 5,
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	font: {
+		fontSize: 14,
+		fontFamily: 'Helvetica Neue'
+	}
+}
+
+'TextField[number=true]': {
+	keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
+	enabled:true,
+    focusable:true
+}
+
+'Button': {
+	font: {
+		fontSize: 20,
+		fontWeight: 'bold'
+	}
+}
+
+'TableViewRow': {
+	height: 35
+}
+
+'TableViewSection':  {
+	backgroundColor: '#C0C0C0',
+	font: {
+		fontWeight: 'bold'
+	}
+}
+
+'.hr_row': {
+	height: 15
+}
+
+'.hr': {
+	borderColor: "black",
+	borderWidth: 2,
+	height: 2,
+	left: 5,
+	right: 5
+}
