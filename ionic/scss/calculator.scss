@@ -1,0 +1,64 @@
+@mixin width ($size) {
+	-webkit-box-flex: $size;
+	-webkit-flex: $size;
+	-moz-box-flex: $size;
+	-moz-flex: $size;
+	-ms-flex: $size;
+	flex: $size;
+}
+
+.calculator {
+	.row {
+		&>div {
+			padding: 14px 5px 0;
+		}
+
+		&>div:nth-child(1) {
+			@include width(130px);
+			max-width: 130px;
+			display: block;
+			font-weight: bold;
+		}
+
+		&>div:nth-child(2) {
+			padding: 0 60px 0 0;
+			position: relative;
+		}
+
+		l {
+			position: absolute;
+			top: 14px;
+			right: 0;
+
+			color: #999;
+			b {
+				color: #0c60ee;
+			}
+		}
+
+		.range {
+			border: none;
+		}
+
+		input {
+			margin: 0;
+			padding: 0 5px;
+			width: 100%;
+		}
+
+		input[type=number], input[type=text] {
+			margin: 5px 0 0 0;
+		}
+	}
+}
+
+
+@media (max-width: 567px) {
+	.calculator .row {
+		flex-direction: column;
+
+		&>div:nth-child(1) {
+			@include width(1);
+		}
+	}
+}

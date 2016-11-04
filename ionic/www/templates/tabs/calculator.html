@@ -1,0 +1,174 @@
+<ion-view view-title="Calculator" class="calculator">
+	<ion-content class="padding">
+		<div class="row">
+			<div class="col">Airspeed</div>
+			<div class="col">
+				<div>
+					<div class="item range">
+						<i>40</i>
+						<input type="range" min="40" max="300" ng-model="model.IAS"/>
+						<i>300</i>
+					</div>
+				</div>
+				<l><b>{{model.IAS}}</b> Kts</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Altitude</div>
+			<div class="col">
+				<div class="item range">
+					<i>500</i>
+					<input type="range" min="500" max="60000" step="500" ng-model="model.IA"/>
+					<i>60000</i>
+				</div>
+				<l><b>{{model.IA | number : fractionSize}}</b> Ft</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Altimeter</div>
+			<div class="col">
+				<div class="item range">
+					<i>25.00</i>
+					<input type="range" min="25.00" max="40.00" step=".01" ng-model="model.altstg"/>
+					<i>40.00</i>
+				</div>
+				<l><b>{{model.altstg | number: 2}}</b> Hg</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Temperature</div>
+			<div class="col">
+				<div class="item range">
+					<i>-55</i>
+					<input type="range" min="-55" max="55.00" step=".1" ng-model="model.temp"/>
+					<i>55</i>
+				</div>
+				<l><b>{{model.temp | number: 1}}</b>° C</l>
+			</div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col">Wind Speed</div>
+			<div class="col">
+				<div class="item range">
+					<i>0</i>
+					<input type="range" min="0" max="255.00" ng-model="model.WS"/>
+					<i>255</i>
+				</div>
+				<l><b>{{model.WS}}</b> Kts</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Wind Direction</div>
+			<div class="col">
+				<div class="item range">
+					<i>0</i>
+					<input type="range" min="0" max="359" ng-model="model.WD"/>
+					<i>359</i>
+				</div>
+				<l><b>{{model.WD | numberFixedLen: 3}}</b> °</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Course</div>
+			<div class="col">
+				<div class="item range">
+					<i>0</i>
+					<input type="range" min="0" max="359" ng-model="model.course"/>
+					<i>359</i>
+				</div>
+				<l><b>{{model.course | numberFixedLen: 3}}</b> °</l>
+			</div>
+		</div>
+		<hr/>
+		<h3>Holding Calculation Distance</h3>
+		<div class="row">
+			<div class="col">Cross-Track Error</div>
+			<div class="col">
+				<input type="text" placeholder="XTRK" ng-model="model.XTRK" disabled="disabled">
+				<l>NM</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Diagonal  Distance</div>
+			<div class="col">
+				<input type="text" placeholder="Diagonal  Distance" ng-model="model.diagonal" disabled="disabled">
+				<l>NM</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Inbound Leg</div>
+			<div class="col">
+				<input type="text" placeholder="Inbound Leg Distance" ng-model="model.inbound" disabled="disabled">
+				<l>NM</l>
+			</div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col">True Airspeed</div>
+			<div class="col">
+				<input type="number" placeholder="TAS" ng-model="model.TAS" disabled="disabled">
+				<l>Kts</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Ground Speed</div>
+			<div class="col">
+				<input type="number" placeholder="Ground Speed" ng-model="model.GS" disabled="disabled">
+				<l>Kts</l>
+			</div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col">Heading</div>
+			<div class="col">
+				<input type="number" placeholder="Heading" ng-model="model.heading" disabled="disabled">
+				<l>°</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Wind Correction</div>
+			<div class="col">
+				<input type="number" placeholder="Wind Correction Angle" ng-model="model.WCA" disabled="disabled">
+				<l>°</l>
+			</div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col">Headwind</div>
+			<div class="col">
+				<input type="number" placeholder="Headwind" ng-model="model.HW" disabled="disabled">
+				<l>Kts</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Tailwind</div>
+			<div class="col">
+				<input type="number" placeholder="Tailwind" ng-model="model.TW" disabled="disabled">
+				<l>Kts</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Crosswind</div>
+			<div class="col">
+				<input type="number" placeholder="Crosswind" ng-model="model.CW" disabled="disabled">
+				<l>Kts</l>
+			</div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col">Density Altitude</div>
+			<div class="col">
+				<input type="number" placeholder="DA" ng-model="model.DA" disabled="disabled">
+				<l>Ft</l>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">Pressure Altitude</div>
+			<div class="col">
+				<input type="number" placeholder="PA" ng-model="model.PA" disabled="disabled">
+				<l>Ft</l>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

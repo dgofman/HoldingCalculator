@@ -1,0 +1,6 @@
+node_modules
+coverage
+plugins
+platforms
+www/lib/ionic
+www/js/vendor

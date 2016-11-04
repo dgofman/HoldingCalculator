@@ -1,0 +1,18 @@
+<!--
+Create tabs with an icon and label, using the tabs-positive style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+<ion-tabs class="tabs-icon-top tabs-positive">
+
+  <!-- Calculator Tab -->
+  <ion-tab title="Calculator" icon-off="ion-calculator" icon-on="ion-calculator" href="#/tab/calculator">
+    <ion-nav-view name="calculator"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Pattern Tab -->
+  <ion-tab title="Pattern" icon-off="ion-merge" icon-on="ion-merge" href="#/tab/pattern">
+    <ion-nav-view name="pattern"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>
