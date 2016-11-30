@@ -9,7 +9,7 @@
     "adb_restart": "%ANDROID_HOME%/platform-tools/adb kill-server && %ANDROID_HOME%/platform-tools/adb start-server",
     "adb_devices": "%ANDROID_HOME%/platform-tools/adb devices",
     "android": "ionic run android",
-    "postinstall": "gulp"
+    "postinstall": "gulp && ionic state reset && ionic config build"
   },
   "dependencies": {
     "gulp": "^3.5.6",
@@ -31,7 +31,8 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-geolocation"
   ],
   "cordovaPlatforms": []
 }

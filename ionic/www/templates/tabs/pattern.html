@@ -1,12 +1,27 @@
 <ion-view view-title="Pattern" class="pattern">
-  <ion-content>
-     <!--div>accuracy {{model.accuracy}}</div>
-     <div>altitude {{model.altitude}}</div>
-     <div>altitudeAccuracy {{model.altitudeAccuracy}}</div>
-     <div>heading {{model.heading}}</div>
-     <div>latitude {{model.latitude}}</div>
-     <div>longitude {{model.longitude}}</div>
-     <div>speed {{model.speed}}</div-->
-     <div id="map"></div>
+  <ion-content scroll="false">
+     <ion-pane drag-content="false">
+         <div id="map"></div>
+         <div style="position: absolute; top: 0; left: 20px; z-index: 999; font-weight: bold;">
+             <div>accuracy {{model.accuracy}}</div>
+             <div>altitude {{model.altitude}}</div>
+             <div>altitudeAccuracy {{model.altitudeAccuracy}}</div>
+             <div>heading {{model.heading}}</div>
+             <div>latitude {{model.latitude}}</div>
+             <div>longitude {{model.longitude}}</div>
+             <div>speed {{model.speed}}</div>
+         </div>
+         <div style="position: absolute; top: 20px; right: 20px; z-index: 999;">
+            <b>Inbound: {{model.inbound}}°</b>
+            <div class="item range">
+                <i>0</i>
+                <input type="range" min="0" max="359" ng-model="model.inbound" />
+                <i>359</i>
+             </div>
+             <br/>
+             <ion-checkbox ng-model="model.right_entry" ng-checked="model.right_entry">Standard (right turn)</ion-checkbox>
+        </div>
+        <i class="ion-android-radio-button-on target" ng-click="findPlane()"></i>
+    </ion-pane>
   </ion-content>
 </ion-view>

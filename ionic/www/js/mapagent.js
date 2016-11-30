@@ -24,7 +24,7 @@ angular.module('holding.mapAgent', [])
 			var bounds = new L.LatLngBounds( new L.LatLng(boundVal[1],boundVal[0]), new L.LatLng(boundVal[3],boundVal[2]) );
 			var MBLayer = L.TileLayer.extend({
 				getTileUrl: function (tilePoint) {
-					var zoom = Math.min(config._metadata['maxzoom'], tilePoint.z),
+					var zoom = Math.min(this.options.maxNativeZoom, tilePoint.z),
 						limit = Math.pow(2, zoom);
 					tilePoint.y = limit - tilePoint.y - 1;
 					return config.getTileImage(tilePoint.x, tilePoint.y, zoom);
@@ -32,8 +32,8 @@ angular.module('holding.mapAgent', [])
 			});
 
 			var MBLayerObj = new MBLayer('map_layer', {
-				maxNativeZoom: config._metadata['maxzoom'],
-				minZoom: config._metadata['minzoom'],
+				maxNativeZoom: parseInt(config._metadata['maxzoom']),
+				minZoom: parseInt(config._metadata['minzoom']),
 				maxZoom: 12,
 				opacity: 1,
 				bounds: bounds,
@@ -42,22 +42,41 @@ angular.module('holding.mapAgent', [])
 
 			map.addLayer(MBLayerObj);
 
-			//console.log(centerVal);
-			//map.setView(new L.LatLng(parseFloat(boundVal[1]),parseFloat(boundVal[0])),parseInt(boundVal[2]));
 			map.fitBounds(bounds);
-			map.setZoom(10);
+			map.setMaxBounds(bounds);
 		};
 
+	var RotatedMarker = L.Marker.extend({
+		_setPos: function (pos) {
+			L.Marker.prototype._setPos.call(this, pos);
+			this.setAngle(this.options.angle);
+		},
+		setAngle: function(val) {
+			this.options.angle = val;
+			if (this._icon) {
+				var rotate = ' rotate(' + this.options.angle + 'deg)',
+					transform = this._icon.style[L.DomUtil.TRANSFORM];
+
+				if (transform.indexOf('rotate') === -1) {
+					transform += rotate;
+				} else {
+					transform = transform.replace(/rotate.*/, rotate);
+				}
+				this._icon.style[L.DomUtil.TRANSFORM] = transform;
+			}
+		}
+	});
+	L.RotatedMarker = function (pos, options) {
+		return new RotatedMarker(pos, options);
+	};
 
 	return {
 		createMap: function() {
 			map = new L.Map('map', {
-				zoomControl: true
+				zoomControl: false,
+				maxBoundsViscosity: 1.0
 			});
-
-			map.on('click', function(e) {
-				console.log("Lat, Lon : " + e.latlng.lat + "," + e.latlng.lng, map.getZoom());
-			});
+			return map;
 		},
 
 		createLayer: function(file) {

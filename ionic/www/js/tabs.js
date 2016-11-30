@@ -1,33 +1,13 @@
 'use strict';
 
-angular.module('holding.tabs', ['holding.calculator', 'holding.mapAgent'])
+angular.module('holding.tabs', ['holding.calculator', 'starter.pattern'])
 
 .controller('CalculatorCtrl', function($scope, $filter, Calculator) {
-	Calculator.init($scope);
-
-	$scope.$watchGroup([
-		function(){ return $scope.model.IAS; },
-		function(){ return $scope.model.altstg; },
-		function(){ return $scope.model.temp; },
-		function(){ return $scope.model.WS; },
-		function(){ return $scope.model.WD; },
-		function(){ return $scope.model.course; }
-	], function() {
-		Calculator.compute($scope.model, $filter);
-	});
-
-	$scope.$watchGroup([
-		function(){ return $scope.model.IA; }
-	], function() {
-		Calculator.calcAlt($scope.model);
-	});
+	Calculator.init($scope, $filter);
 })
 
-.controller('PatternCtrl', function($scope, MapAgent) {
-	MapAgent.createMap();
-	//createLayer('ENR_L02_2016-09-15_ca8.mbtiles');
-	//createLayer('ENR_L03_2016-09-15_c71.mbtiles');
-	MapAgent.createLayer('mbtiles/EnrouteLowUS/L3/ENR_L02.mbtiles');
+.controller('PatternCtrl', function($scope, Pattern) {
+	Pattern.init($scope);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

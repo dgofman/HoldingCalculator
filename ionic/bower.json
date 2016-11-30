@@ -2,7 +2,6 @@
   "name": "HelloIonic",
   "private": "true",
   "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.3.2",
-    "ngCordova": "ngCordova"
+    "ionic": "driftyco/ionic-bower#1.3.2"
   }
 }

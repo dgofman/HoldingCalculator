@@ -30,7 +30,9 @@ angular.module('holding.calculator', [])
 	var tempGrads = new Array(-6.5, 0, 1, 2.8, 0, -2.8, -2, 0);
 
 	return {
-		init: function($scope) {
+		init: function($scope, $filter) {
+			var self = this;
+
 			$scope.model = {
 				IAS: 120,
 				IA: 6000,
@@ -40,6 +42,23 @@ angular.module('holding.calculator', [])
 				WD: 0,
 				course: 0
 			};
+
+			$scope.$watchGroup([
+				function(){ return $scope.model.IAS; },
+				function(){ return $scope.model.altstg; },
+				function(){ return $scope.model.temp; },
+				function(){ return $scope.model.WS; },
+				function(){ return $scope.model.WD; },
+				function(){ return $scope.model.course; }
+			], function() {
+				self.compute($scope.model, $filter);
+			});
+
+			$scope.$watchGroup([
+				function(){ return $scope.model.IA; }
+			], function() {
+				self.calcAlt($scope.model);
+			});
 		},
 
 		roundit: function(thenum) {
