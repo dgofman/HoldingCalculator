@@ -1,13 +1,16 @@
 'use strict';
 
-angular.module('holding.tabs', ['holding.calculator', 'starter.pattern'])
+angular.module('holding.tabs', ['holding.calculator', 'holding.pattern'])
 
 .controller('CalculatorCtrl', function($scope, $filter, Calculator) {
 	Calculator.init($scope, $filter);
 })
 
-.controller('PatternCtrl', function($scope, Pattern) {
-	Pattern.init($scope);
+.controller('PatternCtrl', function($scope, $ionicLoading, Pattern) {
+	$ionicLoading.show({
+		template: 'Loading...'
+	});
+	Pattern.init($scope, $ionicLoading);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {

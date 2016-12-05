@@ -5,9 +5,9 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'holding' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('holding', ['ionic', 'holding.tabs'])
+angular.module('holding', ['ionic', 'holding.utils', 'holding.tabs'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, Utils) {
 	$ionicPlatform.ready(function() {
 		if(window.cordova && window.cordova.plugins.Keyboard) {
 			// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -22,5 +22,9 @@ angular.module('holding', ['ionic', 'holding.tabs'])
 		if(window.StatusBar) {
 			window.StatusBar.styleDefault();
 		}
+
+		Utils.updates = function() {
+			//Utils.download('test.zip', 'maps', 'https://dl.dropboxusercontent.com/u/7197720/ftpack.zip');
+		};
 	});
 });

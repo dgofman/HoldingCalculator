@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('starter.pattern', ['holding.mapAgent'])
-.factory('Pattern', function(MapAgent) {
+angular.module('holding.pattern', ['holding.mapAgent', 'holding.utils'])
+.factory('Pattern', function(MapAgent, Utils) {
 
 	var map,
 		plane,
@@ -9,6 +9,7 @@ angular.module('starter.pattern', ['holding.mapAgent'])
 		course,
 		nmToMeter = 1852,
 		L = window.L,
+		database = {},
 		mNorth = 13.5, //magnetic variation
 		po = { //plane options
 			width: 50,
@@ -88,7 +89,18 @@ angular.module('starter.pattern', ['holding.mapAgent'])
 				'</svg>';
 
 	return {
-		init: function($scope) {
+		init: function($scope, $ionicLoading) {
+			var options = {
+				enableHighAccuracy: true,
+				maximumAge:0,
+				timeout:5000
+			};
+
+			Utils.openDB('airport', database);
+			Utils.openDB('facility', database);
+			Utils.openDB('natfix', database);
+			Utils.openDB('navfix', database);
+
 			map = MapAgent.createMap();
 
 			map.on('zoomend', function() {
@@ -110,7 +122,12 @@ angular.module('starter.pattern', ['holding.mapAgent'])
 							}).addTo(map);
 
 							hold = L.RotatedMarker(e.latlng, {
-								angle: $scope.model.inbound
+								angle: $scope.model.inbound,
+								icon: L.divIcon({ 
+									iconSize: new L.Point(0, 0),
+									iconAnchor: [0, 0],
+									html: ''
+								})
 							}).addTo(map);
 
 							drawHold([$scope.model.right_entry]);
@@ -120,16 +137,26 @@ angular.module('starter.pattern', ['holding.mapAgent'])
 						hold.setLatLng(e.latlng);
 
 						map.setView(e.latlng, map.getMaxZoom());
+
+						var contents = Utils.findFix(database.airport, e.latlng.lat, e.latlng.lng, $scope.model.distance);
+						if (contents.length) {
+							console.log(e.latlng.lat, e.latlng.lng);
+							console.log(JSON.stringify(contents[0].values, null, 2));
+						}
 					}
 				}, false);
 			}
 
-			MapAgent.createLayer('mbtiles/EnrouteLowUS/ENR_L03.mbtiles');
+			MapAgent.createLayer('mbtiles/EnrouteLowUS/ENR_L03.mbtiles', function() {
+				$ionicLoading.hide();
+			});
 
 			//Define scope model
 			$scope.model = {
 				inbound: 0,
-				right_entry: true
+				distance: 10,
+				right_entry: true,
+				accuracy_state: 'gray'
 			};
 
 			$scope.$watchGroup([
@@ -199,10 +226,20 @@ angular.module('starter.pattern', ['holding.mapAgent'])
 								plane.setAngle(parseInt(position.coords.heading));
 							}
 							plane.setLatLng(cur_pos);
-					});
-				}, function() {
+
+							if ($scope.model.accuracy_state !== 'green') {
+								$scope.model.accuracy_state = 'green';
+								$scope.$apply();
+							}
+					}, function(err) {
+						$scope.model.accuracy_state = 'red';
+						$scope.$apply();
+						console.warn('ERROR(' + err.code + '): ' + err.message);
+					}, options);
+				}, function(err) {
+					console.warn('ERROR(' + err.code + '): ' + err.message);
 					alert('Error: The Geolocation service failed.');
-				}, {enableHighAccuracy:true, maximumAge:30000, timeout:27000});
+				}, options);
 			}
 		}
 	};

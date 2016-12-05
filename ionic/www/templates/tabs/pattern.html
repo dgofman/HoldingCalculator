@@ -20,8 +20,16 @@
              </div>
              <br/>
              <ion-checkbox ng-model="model.right_entry" ng-checked="model.right_entry">Standard (right turn)</ion-checkbox>
+
+             <b>Inbound: {{model.distance}}</b>
+             <div class="item range">
+                <i>0</i>
+                <input type="range" min="0" max="159" ng-model="model.distance" />
+                <i>150</i>
+             </div>
+
         </div>
-        <i class="ion-android-radio-button-on target" ng-click="findPlane()"></i>
+        <i class="ion-android-radio-button-on target" ng-click="findPlane()" style="color: {{model.accuracy_state}}; border-color: {{model.accuracy_state}}"></i>
     </ion-pane>
   </ion-content>
 </ion-view>

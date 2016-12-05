@@ -6,20 +6,7 @@ angular.module('holding.mapAgent', [])
 		L = window.L,
 		MBTiles = window.MBTiles,
 
-		httpRequest = function(file) {
-			var http = new window.XMLHttpRequest();
-			http.open("GET", file, true);
-			http.responseType = "arraybuffer";
-
-			http.onload = function () {
-				var g = new MBTiles();
-				g._open(new Uint8Array(http.response));
-				callback(g);
-			};
-
-			http.send(null);
-		},
-		callback = function(config) {
+		callback = function(config, done) {
 			var boundVal = config._metadata['bounds'].split(",");
 			var bounds = new L.LatLngBounds( new L.LatLng(boundVal[1],boundVal[0]), new L.LatLng(boundVal[3],boundVal[2]) );
 			var MBLayer = L.TileLayer.extend({
@@ -44,6 +31,7 @@ angular.module('holding.mapAgent', [])
 
 			map.fitBounds(bounds);
 			map.setMaxBounds(bounds);
+			done();
 		};
 
 	var RotatedMarker = L.Marker.extend({
@@ -79,13 +67,24 @@ angular.module('holding.mapAgent', [])
 			return map;
 		},
 
-		createLayer: function(file) {
+		createLayer: function(file, done) {
 			if (window.location.port !== '80') {
-				httpRequest('./' + file);
+				var http = new window.XMLHttpRequest();
+				http.open("GET", './' + file, true);
+				http.responseType = "arraybuffer";
+
+				http.onload = function () {
+					var config = new MBTiles();
+					config._open(new Uint8Array(http.response));
+					callback(config, done);
+				};
+				http.send(null);
 			} else { //Web
 				MBTiles.load(
 					window.location.origin + '/maps/' + file,
-					callback
+					function(config) {
+						callback(config, done);
+					}
 				);
 			}
 		}

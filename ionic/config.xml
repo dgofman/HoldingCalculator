@@ -3,20 +3,21 @@
   <name>HoldingCalculator.</name>
   <description>
         Holding Calculator.
-    </description>
+  </description>
   <author email="dgofman@gmail.com" href="http://example.com.com/">
       David Gofman
-    </author>
+  </author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
-  <preference name="SplashScreenDelay" value="2000"/>
-  <preference name="FadeSplashScreenDuration" value="2000"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-  <preference name="SplashScreen" value="screen"/>
+  <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root"/>
+  <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,assets,root"/>
+  <preference name="AndroidPersistentFileLocation" value="Compatibility"/>
+  <preference name="iosPersistentFileLocation" value="Compatibility"/>
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
